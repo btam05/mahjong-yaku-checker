@@ -8,11 +8,12 @@ const App = () => {
     const [tiles, setTiles] = useState([])
 
     const addTile = (tile) => {
-        if (tiles.length <= 14) setTiles([...tiles, tile])
+        if (tiles.length < 14) setTiles([...tiles, tile])
+        console.log(tile)
     }
 
-    const removeTile = (index) => {
-        if (tiles.length > 0) setTiles(tiles.splice(index, 1))
+    const removeTile = (targetIndex) => {
+        if (tiles.length > 0) setTiles(tiles.filter((_, index) => index != targetIndex))
     }
 
     const resetTiles = () => {
@@ -22,8 +23,8 @@ const App = () => {
     return (
         <div className="container">
             <Header/>
-            <TileDisplay tiles={tiles}/>
-            <Buttons onTileAdd={addTile} onTileRemove={removeTile} onTileReset={resetTiles}/>
+            <TileDisplay tiles={tiles} onTileRemove={removeTile}/>
+            <Buttons onTileAdd={addTile} onTileReset={resetTiles}/>
             <YakuDisplay tiles={tiles}/>
         </div>
     )
