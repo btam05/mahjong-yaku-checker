@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/Header'
+import TileDisplay from './components/TileDisplay'
+import Buttons from './components/Buttons'
+import YakuDisplay from './components/YakuDisplay'
+import {useState} from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [tiles, setTiles] = useState([])
+
+    const addTile = (tile) => {
+        if (tiles.length <= 14) setTiles([...tiles, tile])
+    }
+
+    const removeTile = (index) => {
+        if (tiles.length > 0) setTiles(tiles.splice(index, 1))
+    }
+
+    const resetTiles = () => {
+        setTiles([])
+    }
+
+    return (
+        <div className="container">
+            <Header/>
+            <TileDisplay tiles={tiles}/>
+            <Buttons onTileAdd={addTile} onTileRemove={removeTile} onTileReset={resetTiles}/>
+            <YakuDisplay tiles={tiles}/>
+        </div>
+    )
 }
 
-export default App;
+export default App
