@@ -7,6 +7,8 @@
 
 # testing
 /coverage
+start.bat
+update_*
 
 # production
 /build
@@ -17,6 +19,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+
+# notepad++ files
+*.bak
 
 npm-debug.log*
 yarn-debug.log*
